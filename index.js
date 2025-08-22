@@ -3,51 +3,18 @@ const bcrypt = require("bcrypt")
 const jwt = require("jsonwebtoken")
 const mongoose = require("mongoose")
 
+const {userRouter} = require("./user")
+const {courseRouter} = require("./course")
+
 const app = express()
 
 
-app.post("/user/signup", (req,res)=>{
-    res.json({
-        msg:"user signup"
-    })
-
-})
+app.use("/api/v1/user", userRouter)
+app.use("/api/v1/course", courseRouter)
 
 
 
 
-app.post("/user/signin", (req,res)=>{
-    res.json({
-        msg:"user signin"
-    })
-})
-
-
-
-
-app.get("/user/purchases", (req,res)=>{
-    res.json({
-        msg:"user purchased courses"
-    })
-})
-
-
-
-
-app.get("/course/purchase", (req,res)=>{
-    res.json({
-        msg:"user purchasing course"
-    })
-})
- 
-
-
-
-app.get("/courses", (req,res)=>{
-    res.json({
-        msg:"All the courses"
-    })
-})
 
 
 async function server(){
