@@ -1,8 +1,8 @@
 const {Router} = require("express");
 
-const courseRouter = Router
+const courseRouter = Router()
 
-courseRouter.get("/course/purchase", (req,res)=>{
+courseRouter.get("/purchase", (req,res)=>{
     res.json({
         msg:"user purchasing course"
     })
@@ -11,7 +11,7 @@ courseRouter.get("/course/purchase", (req,res)=>{
 
 
 
-courseRouter.get("/course/preview", (req,res)=>{
+courseRouter.get("/preview", (req,res)=>{
     res.json({
         msg:"All the courses"
     })
