@@ -21,8 +21,8 @@ app.use("/api/v1/admin",adminRouter)
 
 async function server(){
     await mongoose.connect("mongodb+srv://divyanshujain:mongo123@cluster0.hqz2muc.mongodb.net/Coursify")
-    await console.log("connected to DB")
-    await app.listen(3000)
-    await console.log("Server started at port: 3000")
+    console.log("connected to DB")
+    app.listen(3000)
+    console.log("Server started at port: 3000")
 }
 server()

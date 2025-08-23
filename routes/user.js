@@ -1,7 +1,7 @@
 const {Router} = require("express");
 const userRouter = Router()
 const {userModel} = require("../db")
-
+const {userAuth} = require("../auth-middlewares/userMiddleware")
 
 
 userRouter.post("/signup", (req,res)=>{
@@ -21,6 +21,11 @@ userRouter.post("/signin", (req,res)=>{
 })
 
 
+
+
+
+
+app.use(userAuth)
 
 
 userRouter.get("/purchases", (req,res)=>{
