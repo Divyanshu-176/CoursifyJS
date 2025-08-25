@@ -2,21 +2,10 @@ const {Router}=require("express");
 const adminRouter = Router()
 const {adminModel} = require("../db")
 const {adminAuth} = require("../auth-middlewares/adminMiddleware")
-
+const bcrypt = require("bcrypt")
 
 
 adminRouter.post("/signup", async (req,res)=>{
-    const email = req.body.email;
-    const password = req.body.password;
-    const name = req.body.name
-
-    await adminModel.create({
-        email,
-        password,
-        name
-    })
-
-    
     res.json({
         msg:"Admin signup"
     })
@@ -33,7 +22,7 @@ adminRouter.post("/signin",(req,res)=>{
 
 
 
-app.use(adminAuth)
+adminRouter.use(adminAuth)
 
 
 

@@ -4,7 +4,8 @@ const {userModel} = require("../db")
 const {userAuth} = require("../auth-middlewares/userMiddleware")
 
 
-userRouter.post("/signup", (req,res)=>{
+userRouter.post("/signup", async (req,res)=>{
+   
     res.json({
         msg:"user signup"
     })
@@ -25,7 +26,7 @@ userRouter.post("/signin", (req,res)=>{
 
 
 
-app.use(userAuth)
+userRouter.use(userAuth)
 
 
 userRouter.get("/purchases", (req,res)=>{
