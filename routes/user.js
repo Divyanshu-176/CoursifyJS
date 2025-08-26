@@ -35,8 +35,6 @@ userRouter.post("/signup", async (req,res)=>{
 })
 
 
-
-
 userRouter.post("/signin", async (req,res)=>{
     const {email, password} = req.body
         try {
@@ -66,6 +64,7 @@ userRouter.post("/signin", async (req,res)=>{
             })
         }
 })
+
 
 
 

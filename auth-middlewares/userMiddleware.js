@@ -1,5 +1,3 @@
-
-
 function userAuth(req,res,next){
 
 }
