@@ -1,4 +1,6 @@
-function userAuth(req,res,next){
+ 
+ 
+ function userAuth(req,res,next){
 
 }
 

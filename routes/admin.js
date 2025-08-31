@@ -1,5 +1,4 @@
 const {Router}=require("express");
-const adminRouter = Router()
 const {adminModel} = require("../db")
 const {adminAuth} = require("../auth-middlewares/adminMiddleware")
 const bcrypt = require("bcrypt")
@@ -9,7 +8,7 @@ const JWT_ADMIN_SECRET ="ADMIN_SECRET"
 
 
 
-
+const adminRouter = Router()
 
 
 
