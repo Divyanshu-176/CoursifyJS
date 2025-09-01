@@ -1,10 +1,10 @@
 const {Router}=require("express");
 const {adminModel} = require("../db")
-const {adminAuth} = require("../auth-middlewares/adminMiddleware")
+const {adminMiddleware} = require("../auth-middlewares/adminMiddleware")
 const bcrypt = require("bcrypt")
 
 const jwt = require("jsonwebtoken")
-const JWT_ADMIN_SECRET ="ADMIN_SECRET"
+const {JWT_ADMIN_SECRET} = require("../config")
 
 
 
@@ -70,11 +70,18 @@ adminRouter.post("/signin", async (req,res)=>{
 
 
 
-adminRouter.use(adminAuth)
+adminRouter.use(adminMiddleware)
 
-adminRouter.post("/course",(req,res)=>{
+adminRouter.post("/course", async(req,res)=>{
+    const adminId = req.userId
+
+    const {title,description,price,imageUrl} = req.body
+    await courseModel.create({
+        title,description,price,imageUrl,creatorId: adminId
+    })
     res.json({
-        msg:"Admin course creation"
+        msg:"Admin Course Created",
+        courseId : course._id
     })
 })
 

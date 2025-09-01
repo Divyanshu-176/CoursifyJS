@@ -22,7 +22,7 @@ const courseSchema = new Schema({
     title:String,
     description:String,
     price:Number,
-    imageURL:String,
+    imageUrl:String,
     creatorId:Schema.Types.ObjectId
     
 })

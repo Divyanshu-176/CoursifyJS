@@ -1,11 +1,11 @@
 const {Router} = require("express");
 const userRouter = Router()
 const {userModel} = require("../db")
-const {userAuth} = require("../auth-middlewares/userMiddleware")
+const {userMiddleware} = require("../auth-middlewares/userMiddleware")
 const bcrypt = require("bcrypt")
 
 const jwt = require("jsonwebtoken")
-const JWT_USER_SECRET ="USER_SECRET"
+const {JWT_USER_SECRET} = require("../config")
 
 
 
@@ -71,7 +71,7 @@ userRouter.post("/signin", async (req,res)=>{
 
 
 
-userRouter.use(userAuth)
+userRouter.use(userMiddleware)
 
 
 userRouter.get("/purchases", (req,res)=>{
