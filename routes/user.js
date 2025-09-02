@@ -81,7 +81,8 @@ userRouter.get("/purchases", async(req,res)=>{
         userId
     })
     res.json({
-        msg:"user purchased courses"
+        msg:"user purchased courses",
+        userPurchasedCourses:purchases
     })
 })
 
