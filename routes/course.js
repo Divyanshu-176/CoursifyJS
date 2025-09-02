@@ -2,6 +2,7 @@ const {Router} = require("express");
 const courseRouter = Router()
 
 const {courseModel} = require("../db")
+const {purchaseModel} = require("../db")
 
 
 courseRouter.get("/purchase", (req,res)=>{

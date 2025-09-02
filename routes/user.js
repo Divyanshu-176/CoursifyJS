@@ -3,7 +3,7 @@ const userRouter = Router()
 const {userModel} = require("../db")
 const {userMiddleware} = require("../auth-middlewares/userMiddleware")
 const bcrypt = require("bcrypt")
-
+const {purchaseModel} = require("../db")
 const jwt = require("jsonwebtoken")
 const {JWT_USER_SECRET} = require("../config")
 

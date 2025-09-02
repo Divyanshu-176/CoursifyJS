@@ -7,6 +7,7 @@ const jwt = require("jsonwebtoken")
 const {JWT_ADMIN_SECRET} = require("../config")
 
 const {courseModel} = require("../db")
+const {purchaseModel} = require("../db")
 
 
 const adminRouter = Router()
@@ -90,30 +91,51 @@ adminRouter.post("/course", async(req,res)=>{
 
 adminRouter.put("/course", async(req,res)=>{
     const {courseId, title, description, price, imageUrl} = req.body;
-
     const adminId = req.userId;
 
-    const course = await courseModel.findOne({
-        courseId:courseId
+    try{
+        const course = await courseModel.updateOne({
+        _id: courseId,
+        creatorId:adminId
+    },{
+        title,
+        description,
+        price,
+        imageUrl
     })
-
-    if(course && course.creatorId === adminId){
-        // await courseModel.findOne
-    }
-
-
-
     res.json({
         msg:"admin update their course"
     })
+    }catch(error){
+        res.status(403).json({
+            msg:`not found: ${error}`
+        })
+    }
+    
 })
 
 
 
-adminRouter.get("/course/bulk",(req,res)=>{
-    res.json({
-        msg:"admin get their created courses"
+adminRouter.get("/course/bulk", async(req,res)=>{
+    const adminId = req.userId
+
+    try {
+        const courses = await courseModel.find({
+            creatorId:adminId
+        })
+
+        res.json({
+        msg:"All courses created by admin",
+        courses
+        
     })
+    } catch (error) {
+        res.status(403).json({
+            msg:`error: ${error}`
+        })
+        
+    }
+    
 })
 
 
