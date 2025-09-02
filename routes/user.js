@@ -1,6 +1,6 @@
 const {Router} = require("express");
 const userRouter = Router()
-const {userModel} = require("../db")
+const {userModel, courseModel} = require("../db")
 const {userMiddleware} = require("../auth-middlewares/userMiddleware")
 const bcrypt = require("bcrypt")
 const {purchaseModel} = require("../db")
@@ -80,9 +80,14 @@ userRouter.get("/purchases", async(req,res)=>{
     const purchases = await purchaseModel.find({
         userId
     })
+
+    const courseData = await courseModel.find({
+        _id: {$in : purchases.map(x=> x.courseId)}
+    })
+
     res.json({
         msg:"user purchased courses",
-        userPurchasedCourses:purchases
+        userPurchasedCourses:courseData
     })
 })
 
