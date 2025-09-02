@@ -2,6 +2,7 @@ const express = require("express")
 const bcrypt = require("bcrypt")
 const jwt = require("jsonwebtoken")
 const mongoose = require("mongoose")
+require('dotenv').config()
 
 const {userRouter} = require("./routes/user")
 const {courseRouter} = require("./routes/course")
@@ -21,9 +22,9 @@ app.use("/api/v1/admin",adminRouter)
 
 
 async function server(){
-    await mongoose.connect("mongodb+srv://divyanshujain:mongo123@cluster0.hqz2muc.mongodb.net/Coursify")
+    await mongoose.connect(process.env.MONGO_URL)
     console.log("connected to DB")
-    app.listen(3000)
+    app.listen(3001)
     console.log("Server started at port: 3000")
 }
 server() 

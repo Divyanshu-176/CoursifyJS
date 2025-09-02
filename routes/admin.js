@@ -6,6 +6,7 @@ const bcrypt = require("bcrypt")
 const jwt = require("jsonwebtoken")
 const {JWT_ADMIN_SECRET} = require("../config")
 
+const {courseModel} = require("../db")
 
 
 const adminRouter = Router()
@@ -76,7 +77,8 @@ adminRouter.post("/course", async(req,res)=>{
     const adminId = req.userId
 
     const {title,description,price,imageUrl} = req.body
-    await courseModel.create({
+    
+    const course = await courseModel.create({
         title,description,price,imageUrl,creatorId: adminId
     })
     res.json({
@@ -86,7 +88,21 @@ adminRouter.post("/course", async(req,res)=>{
 })
 
 
-adminRouter.put("/course",(req,res)=>{
+adminRouter.put("/course", async(req,res)=>{
+    const {courseId, title, description, price, imageUrl} = req.body;
+
+    const adminId = req.userId;
+
+    const course = await courseModel.findOne({
+        courseId:courseId
+    })
+
+    if(course && course.creatorId === adminId){
+        // await courseModel.findOne
+    }
+
+
+
     res.json({
         msg:"admin update their course"
     })
